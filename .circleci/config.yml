@@ -20,7 +20,7 @@ jobs:
            cd ..
            cd rtos
            wget https://liquidtelecom.dl.sourceforge.net/project/freertos/FreeRTOS/V10.0.1/FreeRTOSv10.0.1.zip
-           unzip FreeRTOSv10.0.1.zip
+           unzip -qq FreeRTOSv10.0.1.zip
            cd ..
            make
       
