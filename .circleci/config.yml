@@ -1,0 +1,41 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: vusonbmt/dockerdemo:0.2
+    steps:
+      - checkout
+      - run:
+          name: Build firmware
+          command: 'echo Hello Build'
+      
+      # - store_artifacts:
+      #     path: /tmp/artifacts/stm32f103-cmake-template-stdperiph.bin
+      #     destination: stm32f103-cmake-template-stdperiph.bin
+    
+      # - store_artifacts:
+      #     path: /tmp/artifacts/stm32f103-cmake-template-freertos.bin
+      #     destination: stm32f103-cmake-template-freertos.bin
+  unit-test:
+    docker:
+      - image: vusonbmt/dockerdemo:0.2
+    steps:
+      - checkout
+      - run:
+          name: Intall apt packages
+          command: 'echo Hello UT'
+      # - run:
+      #     name: Build Unit Tests
+      #     command: |
+      #         cd test/rt/testbuild
+      #         make
+      # - run:
+      #     name: Run Unit Tests
+      #     command: |
+      #         ./test/rt/testbuild/build/ch          
+workflows:
+  version: 2.1
+  build_and_test:
+    jobs:
+      - build
+      - unit-test      
