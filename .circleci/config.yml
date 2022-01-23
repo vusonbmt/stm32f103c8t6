@@ -2,12 +2,17 @@ version: 2.1
 jobs:
   build:
     docker:
+    # docker run -it vusonbmt/dockerdemo:0.2 -c "/bin/bash"
       - image: vusonbmt/dockerdemo:0.2
     steps:
       - checkout
       - run:
           name: Build firmware
-          command: 'echo Hello Build'
+          command: |
+           echo Hello Build
+           export PATH="/opt/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
+           arm-none-eabi-gcc --version
+           type gcc
       
       # - store_artifacts:
       #     path: /tmp/artifacts/stm32f103-cmake-template-stdperiph.bin
