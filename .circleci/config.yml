@@ -16,8 +16,9 @@ jobs:
            type gcc
            git clone https://github.com/vusonbmt/stm32f103c8t6.git
            cd stm32f103c8t6
+           pwd
            git clone https://github.com/libopencm3/libopencm3.git
-           cd ../rtos
+           cd rtos
            wget https://liquidtelecom.dl.sourceforge.net/project/freertos/FreeRTOS/V10.0.1/FreeRTOSv10.0.1.zip
            unzip -q FreeRTOSv10.0.1.zip
            pwd
