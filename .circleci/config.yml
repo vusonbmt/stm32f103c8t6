@@ -3,22 +3,21 @@ jobs:
   build:
     docker:
     # docker run -it vusonbmt/dockerdemo:0.2 -c "/bin/bash"
-      - image: vusonbmt/dockerdemo:0.2
+      - image: vusonbmt/dockerdemo:0.3
     steps:
       - checkout
       - run:
           name: Build firmware
           command: |
            echo Hello Build
-           apt-get install -y zip
-           export PATH="/opt/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
            arm-none-eabi-gcc --version
            type gcc
+           pwd
            git clone https://github.com/vusonbmt/stm32f103c8t6.git
            cd stm32f103c8t6
            git clone https://github.com/libopencm3/libopencm3.git
            cd rtos
-           wget https://liquidtelecom.dl.sourceforge.net/project/freertos/FreeRTOS/V10.0.1/FreeRTOSv10.0.1.zip
+           cp /home/FreeRTOSv10.0.1.zip $(pwd)
            unzip -q FreeRTOSv10.0.1.zip
            cd ..
            make
