@@ -24,7 +24,7 @@ jobs:
            cd ../miniblink
            make clobber
            make
-           set build_output_path = $(pwd)
+           build_output_path=$(pwd)
            echo $build_output_path
       - run:
           name: Copy Artifacts
