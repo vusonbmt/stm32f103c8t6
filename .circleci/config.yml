@@ -31,7 +31,14 @@ jobs:
            cp $build_output_path/uart/*.bin /tmp/artifacts/
            cp $build_output_path/uarthwfc/*.bin /tmp/artifacts/
       - store_artifacts:
-          path: /tmp/artifacts           
+          path: /tmp/artifacts/miniblink.bin
+          destination: miniblink.bin
+      - store_artifacts:
+          path: /tmp/artifacts/uart.bin
+          destination: uart.bin
+      - store_artifacts:
+          path: /tmp/artifacts/uarthwfc.bin
+          destination: uarthwfc.bin                                    
   unit-test:
     docker:
       - image: vusonbmt/dockerdemo:0.3
