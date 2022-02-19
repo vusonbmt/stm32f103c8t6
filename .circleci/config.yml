@@ -22,10 +22,10 @@ jobs:
            cp /home/FreeRTOSv10.0.1.zip $(pwd)
            unzip -q FreeRTOSv10.0.1.zip
            cd ../miniblink
+           build_output_path=$(pwd)
+           echo $build_output_path           
            make clobber
            make
-           build_output_path=$(pwd)
-           echo $build_output_path
       - run:
           name: Copy Artifacts
           command: |
