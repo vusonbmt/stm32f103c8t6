@@ -10,7 +10,6 @@ jobs:
           name: Build firmware
           command: |
            echo Hello Build
-           apt-get install libnewlib-arm-none-eabi -y
            export PATH="/opt/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
            arm-none-eabi-gcc --version
            type gcc
@@ -22,10 +21,9 @@ jobs:
            cd rtos
            cp /home/FreeRTOSv10.0.1.zip $(pwd)
            unzip -q FreeRTOSv10.0.1.zip
-           cd ../miniblink
-           build_output_path=$(pwd)
+           cd ..
+           build_output_path=$(pwd)/miniblink
            echo $build_output_path           
-           make clobber
            make
       - run:
           name: Copy Artifacts
