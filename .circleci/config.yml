@@ -13,17 +13,20 @@ jobs:
            export PATH="/opt/toolchains/gcc-arm-none-eabi-10.3-2021.10/bin:$PATH"
            arm-none-eabi-gcc --version
            type gcc
-           pwd
            git clone https://github.com/vusonbmt/stm32f103c8t6.git
            pwd
            cd stm32f103c8t6
-           git clone https://github.com/libopencm3/libopencm3.git
+           git submodule sync;
+           git submodule update --init --recursive;
            cd rtos
            cp /home/FreeRTOSv10.0.1.zip $(pwd)
            unzip -q FreeRTOSv10.0.1.zip
            cd ..
            make
-      
+      # - run:
+      #     command: |
+      #       mkdir -p /tmp/artifacts;
+      #       cp build-stm32/src_freertos/stm32f103-cmake-template.bin /tmp/artifacts/;     
       # - store_artifacts:
       #     path: /tmp/artifacts/stm32f103-cmake-template-stdperiph.bin
       #     destination: stm32f103-cmake-template-stdperiph.bin
