@@ -15,6 +15,7 @@ jobs:
            type gcc
            git clone https://github.com/vusonbmt/stm32f103c8t6.git
            pwd
+           mkdir /tmp/artifacts;
            cd stm32f103c8t6
            git submodule sync;
            git submodule update --init --recursive;
@@ -22,14 +23,13 @@ jobs:
            cp /home/FreeRTOSv10.0.1.zip $(pwd)
            unzip -q FreeRTOSv10.0.1.zip
            cd ..
-           build_output_path=$(pwd)/miniblink
+           build_output_path=$(pwd)
            echo $build_output_path           
            make
-      - run:
-          name: Copy Artifacts
-          command: |
-            mkdir /tmp/artifacts;
-            cp $build_output_path/miniblink.bin
+           echo "Copy binary"
+           cp $build_output_path/miniblink/*.bin /tmp/artifacts/
+           cp $build_output_path/uart/*.bin /tmp/artifacts/
+           cp $build_output_path/uarthwfc/*.bin /tmp/artifacts/
       - store_artifacts:
           path: /tmp/artifacts           
   unit-test:
