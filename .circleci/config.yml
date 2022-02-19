@@ -21,33 +21,21 @@ jobs:
            cd rtos
            cp /home/FreeRTOSv10.0.1.zip $(pwd)
            unzip -q FreeRTOSv10.0.1.zip
-           cd ..
+           cd ../miniblink
+           make clobber
            make
+           set build_output_path = $(pwd)
+           echo $build_output_path
       - run:
-          name: Creating Dummy Artifacts
+          name: Copy Artifacts
           command: |
-            echo "my artifact file" > /tmp/art-1;
             mkdir /tmp/artifacts;
-            echo "my artifact files in a dir" > /tmp/artifacts/art-2;
-      - store_artifacts:
-          path: /tmp/art-1
-          destination: artifact-file
+            cp $build_output_path/*.bin
       - store_artifacts:
           path: /tmp/artifacts           
-      # - run:
-      #     command: |
-      #       mkdir -p /tmp/artifacts;
-      #       cp build-stm32/src_freertos/stm32f103-cmake-template.bin /tmp/artifacts/;     
-      # - store_artifacts:
-      #     path: /tmp/artifacts/stm32f103-cmake-template-stdperiph.bin
-      #     destination: stm32f103-cmake-template-stdperiph.bin
-    
-      # - store_artifacts:
-      #     path: /tmp/artifacts/stm32f103-cmake-template-freertos.bin
-      #     destination: stm32f103-cmake-template-freertos.bin
   unit-test:
     docker:
-      - image: vusonbmt/dockerdemo:0.2
+      - image: vusonbmt/dockerdemo:0.3
     steps:
       - checkout
       - run:
